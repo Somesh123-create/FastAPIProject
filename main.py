@@ -16,7 +16,7 @@ def index():
 
 
 #query parameter
-@app.get('/blog/all', tags=['blog'])
+@app.get('/blog/all', tags=['blog'], summary="Retrieve all blogs", description="This api call simulates fetching all blogs", response_description="The list of available blogs")
 def all_blog(page=1, page_size:Optional[int]=None):
     return {"message":f"all {page_size} blog on page: {page}"}
 
@@ -34,6 +34,13 @@ def blog_types(type: BlogType):
 
 @app.get('/blog/{blog_id}/comment/{comment_id}', tags=['blog', 'comment'])
 def comments(blog_id:int, comment_id:int, valid:bool = True, username: Optional[str] = None):
+    """
+    simulates retriving a comment of a blog
+    - **blog_id** mandatory path parameter
+    - **comment_id** mandatory path parameter
+    - **valid** optional query parameter
+    - **username** optional query parameter
+    """
     return {"message":f"blog_id : {blog_id}, comment_id: {comment_id}, valid: {valid}, username:{username}"}
 
 

@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import get_blogs, post_blogs, user, article
+from routers import get_blogs, post_blogs, user, article, product
 from db import models
 from db.database import engine
 from exceptions import StoryException
@@ -12,6 +12,7 @@ app.include_router(user.router)
 app.include_router(article.router)
 app.include_router(get_blogs.router)
 app.include_router(post_blogs.router)
+app.include_router(product.router)
 
 
 @app.get('/')
@@ -25,5 +26,8 @@ def story_exception_handler(request: Request, exc: StoryException):
         status_code=418,
         content = {"detail": exc.name}
     )
+
+
+
 
 models.Base.metadata.create_all(engine)
